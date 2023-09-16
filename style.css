@@ -1,0 +1,40 @@
+/* Changing default size of browser. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+/* Navbar start here. */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #283618;
+    color: white;
+    padding: 20px 60px;
+}
+
+.cart {
+    position: relative;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    font-size: 30px;
+    border-radius: 5px;
+}
+
+.cartAmount {
+    position: absolute;
+    top: -15px;
+    right: -10px;
+    background-color: red;
+    font-size: 16px;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
