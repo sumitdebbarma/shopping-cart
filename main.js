@@ -47,7 +47,7 @@ const shopItem = () => {
             <div class="price-quantity">
                 <h2>$ ${price}</h2>
                 <div class="buttons">
-                    <i  class="bi bi-dash-lg"></i>
+                    <i onclick= decrement(${id})  class="bi bi-dash-lg"></i>
                     <div id=${id} class="quatity">0</div>
                     <i onclick= increment(${id}) class="bi bi-plus-lg"></i>
                 </div>
@@ -66,9 +66,9 @@ const increment = (id) => {
   let selectedItem = id;
   let seacrh = basket.find((x) => x.id === selectedItem.id);
 
-//   why search is equal to undefined, why not false, null or other falsey value?
+  //   why search is equal to undefined, why not false, null or other falsey value?
 
-// if search is empty, then  push new object inside array. For eg: let search;
+  // if search is empty, then  push new object inside array. For eg: let search;
   if (seacrh === undefined) {
     basket.push({
       id: selectedItem.id,
@@ -77,6 +77,16 @@ const increment = (id) => {
   } else {
     seacrh.item += 1;
   }
-  console.log("selectedItem", selectedItem);
-  console.log("seacrh", seacrh)
+  console.log(basket);
+};
+
+const decrement = (id) => {
+  let selectedItem = id;
+  let seacrh = basket.find((x) => x.id === selectedItem.id);
+  if (seacrh.item === 0) return
+   else {
+    seacrh.item -= 1;
+  }
+
+  console.log(basket);
 };
