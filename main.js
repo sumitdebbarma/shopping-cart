@@ -87,6 +87,11 @@ const update = (Id) => {
   calculate()
 };
 
+const calculate = () => {
+  const cartIcon = document.getElementById("cartAmount")
+  cartIcon.innerHTML = basket.map((x) => x.item).reduce((x,y) => x + y, 0 )
+  
+}
 
 
 
