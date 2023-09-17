@@ -77,7 +77,7 @@ const increment = (id) => {
   } else {
     seacrh.item += 1;
   }
-  console.log(basket);
+  update(selectedItem.id)
 };
 
 const decrement = (id) => {
@@ -87,6 +87,10 @@ const decrement = (id) => {
    else {
     seacrh.item -= 1;
   }
-
-  console.log(basket);
+  update(selectedItem.id)
 };
+
+const update = (id) => {
+    let seacrh = basket.find((x)=> x.id === id)
+    document.getElementById(id).innerHTML = seacrh.item
+}
