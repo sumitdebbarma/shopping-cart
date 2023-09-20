@@ -58,12 +58,9 @@ const shop = () => {
 shop();
 
 const increment = (itemDataArrObjForincrement) => {
-  // console.log("the val of itemDataArrObjForincrement",itemDataArrObjForincrement)
-  // console.log(itemDataArrObjForincrement.id)
 
   const search = basket.find((eachObjectInsideBasket) => {
     return (
-      // console.log("the val of eachObjectInsideBasket.uniqueId",eachObjectInsideBasket.uniqueId),
       eachObjectInsideBasket.uniqueId === itemDataArrObjForincrement.id
     );
   });
@@ -85,13 +82,11 @@ const increment = (itemDataArrObjForincrement) => {
 };
 
 // function with object and array.
-
 const decrement = (itemDataArrObjForDecrement) => {
-  // console.log(itemDataArrObjForDecrement)
-
+ 
   const search = basket.find((eachObjectInsideBasket) => {
     return (
-      // console.log(eachObjectInsideBasket)
+      
       eachObjectInsideBasket.uniqueId === itemDataArrObjForDecrement.id
     );
   });
@@ -101,20 +96,19 @@ const decrement = (itemDataArrObjForDecrement) => {
     search.item -= 1;
   }
   update(itemDataArrObjForDecrement);
+
+  // It will update the basket, it will remove all item if item:0.
   basket = basket.filter((eachObjectInsideBasket) => eachObjectInsideBasket.item !== 0)
   localStorage.setItem("data", JSON.stringify(basket) )
   
-  // console.log("The val of basket for decrement", basket)
 };
 
 const update = (itemDataArrObjForUpdate) => {
-  // console.log(itemDataArrObjForUpdate)
   const search = basket.find((eachObjectInsideBasket) => {
     return eachObjectInsideBasket.uniqueId === itemDataArrObjForUpdate.id;
   });
   document.getElementById(`${itemDataArrObjForUpdate.id}-quantity`).innerHTML =
     search.item;
-  // console.log("the val of search", search)
   calculation();
 };
 
