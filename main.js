@@ -89,13 +89,15 @@ const increment = (itemDataArrObjForincrement) => {
 const decrement = (itemDataArrObjForDecrement) => {
   // console.log(itemDataArrObjForDecrement)
 
-  search = basket.find((eachObjectInsideBasket) => {
+  const search = basket.find((eachObjectInsideBasket) => {
     return (
       // console.log(eachObjectInsideBasket)
       eachObjectInsideBasket.uniqueId === itemDataArrObjForDecrement.id
     );
   });
-  if (search && search.item > 0) {
+
+  if (search === undefined) return
+  else if (search && search.item > 0) {
     search.item -= 1;
   }
 
