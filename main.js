@@ -31,7 +31,7 @@ const itemData = [
   },
 ];
 
-const basket = JSON.parse(localStorage.getItem("data")) || [];
+let basket = JSON.parse(localStorage.getItem("data")) || [];
 
 const shop = () => {
   return (shopElement.innerHTML = itemData.map((eachObjectInsideItemData) => {
@@ -100,9 +100,10 @@ const decrement = (itemDataArrObjForDecrement) => {
   else if (search && search.item > 0) {
     search.item -= 1;
   }
-
-  localStorage.setItem("data", JSON.stringify(basket) )
   update(itemDataArrObjForDecrement);
+  basket = basket.filter((eachObjectInsideBasket) => eachObjectInsideBasket.item !== 0)
+  localStorage.setItem("data", JSON.stringify(basket) )
+  
   // console.log("The val of basket for decrement", basket)
 };
 
