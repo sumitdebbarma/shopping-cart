@@ -1,109 +1,75 @@
-let label = document.getElementById("label");
-let shoppingCart = document.getElementById("shopping-cart");
-
+const label = document.getElementById("label");
+const shoppingCart = document.getElementById("shopping-cart");
 let basket = JSON.parse(localStorage.getItem("data")) || [];
-const calculation = () => {
-  document.getElementById("cartAmount").innerHTML = basket
-    .map((eachObjectInsideBasket) => eachObjectInsideBasket.item)
-    .reduce((prevItem, currentItem) => prevItem + currentItem, 0);
-};
-calculation();
 
-const generateCartItems = () => {
+const updateCartAmount = () => {
+  document.getElementById("cartAmount").innerHTML = basket
+    .map((basketObj) => basketObj.item)
+    .reduce((prevVal, currVal) => prevVal + currVal, 0);
+};
+updateCartAmount();
+
+const generateCart = () => {
   if (basket.length === 0) {
-    shoppingCart.innerHTML = ``;
-    label.innerHTML = `
-        <h2> Cart is empty </h2>
-        <a href="index.html">
-        <button class="homeBtn">Back to home</button>
-        </a>
-        `;
+    return (label.innerHTML = ` <h2> no item </h2> `);
   } else {
-    return (shoppingCart.innerHTML = basket
-      .map((eachObjectInsideBasket) => {
-        let { uniqueId, item } = eachObjectInsideBasket;
-        let search = itemData.find((y) => y.id === uniqueId) || [];
-        return `
-            <div class="cart-item">
-            <img width="100px" src= ${search.image} />
-                <div class="details">
-                    <div class="title-price-x">
-                        <h4 class="title-price">
-                         <p>${search.name}</p>
-                         <p class="cart-item-price" >$ ${search.price}</p>
-                         </h4>
-                         <i class="bi bi-x-lg"></i>
+    return (shoppingCart.innerHTML = basket.map((basketObj) => {
+        const {uniqueId, item} = basketObj;
+
+        const search = itemData.find((dataObj) => dataObj.id === uniqueId  );
+        
+        return ` 
+        <div id="${search.id}" class="item">
+            <img width="200px" src="${search.image}">
+            <div class="details">
+                <h3>${search.name}</h3>
+                <p>${search.description}</p>
+                <div class="price-quantity">
+                    <h2>$ ${search.price}</h2>
+                    <div class="buttons">
+                    <i onclick=decrement('${search.id}')  class="bi bi-dash-lg"></i>
+                    <div id="${search.id}-quantity" class="quantity"> ${item} </div>
+                        <i onclick = increment('${search.id}') class="bi bi-plus-lg"></i>
                     </div>
-                    <div 
-                        <div class="buttons">
-                            <i onclick="decrement(${uniqueId}) " class="bi bi-dash-lg"></i>
-                            <div id="${uniqueId}-quantity" class="quantity">${item} </div>
-                                <i onclick = "increment(${uniqueId})" class="bi bi-plus-lg"></i>
-                        </div> 
-                 </div>
+                </div>
             </div>
-            `;
-      })
-      .join(""));
+        </div>`
+
+    }))
   }
 };
+generateCart();
 
-generateCartItems();
-
-
-
-
-const increment = (itemDataArrObjForincrement) => {
-
-    const search = basket.find((eachObjectInsideBasket) => {
-      return (
-        eachObjectInsideBasket.uniqueId === itemDataArrObjForincrement.id
-      );
-    });
+const increment = (id) => {
+    const search = basket.find((basketObj) => basketObj.uniqueId === id);
   
-    if (search) {
-      search.item += 1;
-    } else {
+    if (search === undefined) {
       basket.push({
-        uniqueId: itemDataArrObjForincrement.id,
+        uniqueId: id,
         item: 1,
       });
+    } else {
+      search.item += 1
     }
-  
-    localStorage.setItem("data", JSON.stringify(basket) )
-    update(itemDataArrObjForincrement);
-  
-    //   console.log("The value of basket for increment", basket);
-    // console.log("The value of search", search)
-  };
-  
-  // function with object and array.
-  const decrement = (itemDataArrObjForDecrement) => {
-   
-    const search = basket.find((eachObjectInsideBasket) => {
-      return (
-        
-        eachObjectInsideBasket.uniqueId === itemDataArrObjForDecrement.id
-      );
-    });
-  
-    if (search === undefined) return
-    else if (search && search.item > 0) {
-      search.item -= 1;
-    }
-    update(itemDataArrObjForDecrement);
-  
-    // It will update the basket, it will remove all item if item:0.
-    basket = basket.filter((eachObjectInsideBasket) => eachObjectInsideBasket.item !== 0)
-    localStorage.setItem("data", JSON.stringify(basket) )
+    update(id)
     
+    localStorage.setItem('data',JSON.stringify(basket))
+   
   };
 
-  const update = (itemDataArrObjForUpdate) => {
-    const search = basket.find((eachObjectInsideBasket) => {
-      return eachObjectInsideBasket.uniqueId === itemDataArrObjForUpdate.id;
-    });
-    document.getElementById(`${itemDataArrObjForUpdate.id}-quantity`).innerHTML =
-      search.item;
-    calculation();
-  };
+  const decrement = (id) => {
+    const search = basket.find((basketObj) => basketObj.uniqueId === id)
+  
+    if ( search === undefined || search.item === 0) return
+    else if (search !== undefined ) {
+      search.item -= 1
+    }
+    update(id)
+    localStorage.setItem("data", JSON.stringify(basket));
+  }
+
+  const update = (id) => {
+    const search = basket.find((basketObj) => (basketObj.uniqueId === id))
+    document.getElementById(`${id}-quantity`).innerHTML = search.item
+    updateCartAmount()
+  }
