@@ -11,12 +11,19 @@ updateCartAmount();
 
 const generateCart = () => {
   if (basket.length === 0) {
-    return (label.innerHTML = ` <h2> no item </h2> `);
+    
+        shoppingCart.innerHTML = ``;
+    label.innerHTML = `
+    <h2>Cart is Empty</h2>
+    <a href="index.html">
+      <button class="HomeBtn">Back to home</button>
+    </a>
+    `;
   } else {
     return (shoppingCart.innerHTML = basket.map((basketObj) => {
         const {uniqueId, item} = basketObj;
 
-        const search = itemData.find((dataObj) => dataObj.id === uniqueId  );
+        const search = itemData.find((dataObj) => dataObj.id === uniqueId  || [] );
         
         return ` 
         <div id="${search.id}" class="item">
@@ -27,8 +34,9 @@ const generateCart = () => {
                 <div class="price-quantity">
                     <h2>$ ${search.price}</h2>
                     <div class="buttons">
-                    <i onclick=decrement('${search.id}')  class="bi bi-dash-lg"></i>
-                    <div id="${search.id}-quantity" class="quantity"> ${item} </div>
+                        <i onclick=decrement('${search.id}')  class="bi bi-dash-lg"></i>
+                        <div id="${search.id}-quantity" class="quantity"> ${item} 
+                        </div>
                         <i onclick = increment('${search.id}') class="bi bi-plus-lg"></i>
                     </div>
                 </div>
@@ -65,6 +73,8 @@ const increment = (id) => {
       search.item -= 1
     }
     update(id)
+    basket = basket.filter((x) => x.item !== 0);
+    generateCart()
     localStorage.setItem("data", JSON.stringify(basket));
   }
 
