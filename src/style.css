@@ -1,4 +1,7 @@
-/* Changing default size of browser. */
+/**
+* ! Changing default styles of the browser
+**/
+
 * {
   margin: 0;
   padding: 0;
@@ -9,16 +12,6 @@ body {
   font-family: sans-serif;
 }
 
-/* Navbar starts here. */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  background-color: #283618;
-  color: white;
-  padding: 20px 60px;
-  margin-bottom: 30px;
-}
-
 i {
   cursor: pointer;
 }
@@ -27,92 +20,116 @@ a {
   text-decoration: none;
   color: white;
 }
+
+/**
+* ! Navbar STyles are here
+**/
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #212529;
+  color: white;
+  padding: 25px 60px;
+  margin-bottom: 30px;
+}
+
 .cart {
   position: relative;
-  background-color: white;
-  color: black;
-  padding: 5px;
+  background-color: #fff;
+  color: #212529;
   font-size: 30px;
-  border-radius: 5px;
+  padding: 5px;
+  border-radius: 4px;
 }
 
 .cartAmount {
   position: absolute;
   top: -15px;
   right: -10px;
-  background-color: red;
   font-size: 16px;
+  background-color: red;
   color: white;
-  padding: 5px;
-  border-radius: 5px;
+  padding: 3px;
+  border-radius: 3px;
 }
-/* Navbar ends here. */
 
-/* Card starts here */
+/**
+* ! Shop items styles are here
+**/
+
 .shop {
   display: grid;
   grid-template-columns: repeat(4, 223px);
   gap: 30px;
   justify-content: center;
+  margin-bottom: 50px;
 }
 
-/* Responsive starts here. */
 @media (max-width: 1000px) {
-    .shop {
-        grid-template-columns: repeat(2, 223px);
-    }
+  .shop {
+    grid-template-columns: repeat(2, 223px);
+  }
 }
+
 @media (max-width: 500px) {
-    .shop {
-        grid-template-columns: repeat(1, 223px);
-    }
+  .shop {
+    grid-template-columns: repeat(1, 223px);
+  }
 }
-/* Responsive ends here. */
 
 .item {
-  border: 2px solid #283618;
-  padding: 2px;
-  border-radius: 10px;
+  border: 2px solid #212529;
+  border-radius: 4px;
 }
 
-
+.item img {
+  width: 100%;
+  border-radius: 2px 2px 0 0;
+}
 .details {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
   gap: 10px;
 }
 
 .price-quantity {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .buttons {
-    display: flex;
-    gap: 8px;
-    font-size: 16px;
-}
-
-.bi-plus-lg {
-    color: green;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  font-size: 16px;
 }
 
 .bi-dash-lg {
-    color: red;
+  color: red;
 }
 
+.bi-plus-lg {
+  color: green;
+}
 
-/* label start here */
+/**
+* ! style rules for label and some buttons
+**/
 
 .text-center {
   text-align: center;
   margin-bottom: 20px;
-
 }
 
-.homeBtn {
+.HomeBtn,
+.checkout,
+.removeAll {
   background-color: #212529;
   color: white;
   border: none;
@@ -122,15 +139,20 @@ a {
   margin-top: 10px;
 }
 
-
+.checkout {
+  background-color: green;
+}
+.removeAll {
+  background-color: red;
+}
 .bi-x-lg {
   color: red;
-  font-weight: normal;
+  font-weight: bold;
 }
 
-
-
-/* shopping-cart start heres */
+/**
+* ! style rules for shopping-cart
+**/
 
 .shopping-cart {
   display: grid;
@@ -139,8 +161,12 @@ a {
   gap: 15px;
 }
 
+/**
+* ! style rules for cart-item
+**/
+
 .cart-item {
-  border:  2px solid black;
+  border: 2px solid #212529;
   border-radius: 5px;
   display: flex;
 }
@@ -150,6 +176,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* border: 2px solid red; */
 }
 
 .title-price {
